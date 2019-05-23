@@ -10,7 +10,6 @@ services:
       driver: fluentd
       options:
         fluentd-address: "127.0.0.1:24224"
-        fluentd-async-connect: "true"
         tag: "nginx.aaa.bbb"
   fluentd:
     image: fluentd-container
