@@ -1,0 +1,23 @@
+version: "3.5"
+
+services:
+  nginx:
+    build: ./nginx
+    container_name: nginx-container
+    ports:
+      - 80:80
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: "127.0.0.1:24224"
+        fluentd-async-connect: "true"
+        tag: "nginx.aaa.bbb"
+  fluentd:
+    image: fluentd-container
+    volumes:
+      - ./fluentd/config:/fluentd/etc
+    container_name: fluentd-container
+    depends_on:
+      - nginx
+    ports:
+      - 24224:24224
